@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thinkfree Partner Portal — 시스템 구성 및 이용 안내</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#faf9f7; --raised:#ffffff; --ink:#14171f; --ink-2:#4a5160; --ink-3:#7b8496;
+  --line:#e4e2dd; --line-2:#d3d0c9;
+  --accent:#0d6e6e; --accent-soft:#e6f2f1; --accent-deep:#0a5252;
+  --warn:#b45309; --warn-soft:#fef6e7;
+  --stop:#b91c1c; --stop-soft:#fdeceb;
+  --go:#15803d; --go-soft:#eaf6ee;
+  --sans:'Noto Sans KR',system-ui,-apple-system,sans-serif;
+  --serif:'Noto Serif KR',Georgia,serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#101218; --raised:#181b23; --ink:#eceef2; --ink-2:#a8b0bf; --ink-3:#727b8c;
+    --line:#282c36; --line-2:#363b47;
+    --accent:#5eb8b3; --accent-soft:#132726; --accent-deep:#7fd0cb;
+    --warn:#e0a94a; --warn-soft:#2a2216;
+    --stop:#e4796f; --stop-soft:#2c1917;
+    --go:#6cc48a; --go-soft:#152519;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101218; --raised:#181b23; --ink:#eceef2; --ink-2:#a8b0bf; --ink-3:#727b8c;
+  --line:#282c36; --line-2:#363b47;
+  --accent:#5eb8b3; --accent-soft:#132726; --accent-deep:#7fd0cb;
+  --warn:#e0a94a; --warn-soft:#2a2216;
+  --stop:#e4796f; --stop-soft:#2c1917;
+  --go:#6cc48a; --go-soft:#152519;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.7;
+  -webkit-font-smoothing:antialiased;font-size:15px}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px 100px}
+
+/* header */
+header{padding:56px 0 36px;border-bottom:1px solid var(--line);margin-bottom:48px}
+.eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);
+  font-weight:700;margin-bottom:14px}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(28px,5vw,40px);line-height:1.25;
+  letter-spacing:-.01em;margin-bottom:12px}
+.lede{color:var(--ink-2);font-size:16px;max-width:60ch}
+.meta{margin-top:24px;display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--ink-3)}
+.meta span{font-family:var(--mono)}
+
+/* lang toggle */
+.langbar{position:sticky;top:0;z-index:20;background:var(--paper);
+  padding:14px 0;margin-bottom:-14px;display:flex;justify-content:flex-end;gap:6px;
+  border-bottom:1px solid transparent}
+.langbtn{font-family:var(--sans);font-size:12px;font-weight:500;padding:5px 14px;
+  border:1px solid var(--line-2);background:var(--raised);color:var(--ink-2);
+  border-radius:99px;cursor:pointer;transition:.15s}
+.langbtn:hover{border-color:var(--accent);color:var(--accent)}
+.langbtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* sections */
+section{margin-bottom:56px;scroll-margin-top:60px}
+h2{font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:-.01em;
+  margin-bottom:6px;padding-top:8px}
+h2 .num{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:500;
+  display:block;margin-bottom:6px;letter-spacing:.06em}
+.sub{color:var(--ink-2);font-size:14px;margin-bottom:26px;max-width:62ch}
+h3{font-size:15px;font-weight:700;margin:32px 0 12px;letter-spacing:-.005em}
+
+p{margin-bottom:14px;color:var(--ink-2)}
+p strong,li strong{color:var(--ink);font-weight:500}
+
+/* figure */
+figure{margin:28px 0;padding:24px 20px;background:var(--raised);border:1px solid var(--line);
+  border-radius:var(--r);overflow-x:auto}
+figure svg{display:block;width:100%;height:auto;min-width:640px}
+figcaption{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--ink-3);line-height:1.65}
+
+/* steps */
+.steps{list-style:none;counter-reset:s;margin:24px 0}
+.steps>li{counter-increment:s;position:relative;padding:0 0 28px 54px}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:-2px;
+  width:32px;height:32px;border-radius:50%;background:var(--accent-soft);
+  color:var(--accent);font-family:var(--mono);font-size:13px;font-weight:500;
+  display:flex;align-items:center;justify-content:center;border:1px solid var(--accent)}
+.steps>li::after{content:'';position:absolute;left:16px;top:34px;bottom:2px;
+  width:1px;background:var(--line-2)}
+.steps>li:last-child{padding-bottom:0}
+.steps>li:last-child::after{display:none}
+.steps h4{font-size:15px;font-weight:700;margin-bottom:6px}
+.steps p{font-size:14px;margin-bottom:8px}
+.actor{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;
+  padding:2px 9px;border-radius:99px;margin-bottom:8px;text-transform:uppercase}
+.actor.tf{background:var(--accent-soft);color:var(--accent-deep)}
+.actor.pt{background:var(--warn-soft);color:var(--warn)}
+
+/* table */
+.tw{overflow-x:auto;margin:20px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:420px}
+th{text-align:left;font-weight:700;font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-3);padding:0 14px 10px;border-bottom:1px solid var(--line-2);white-space:nowrap}
+td{padding:13px 14px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--ink)}
+.mono{font-family:var(--mono);font-size:12.5px}
+
+/* callout */
+.note{border-left:3px solid var(--accent);background:var(--accent-soft);
+  padding:16px 20px;border-radius:0 var(--r) var(--r) 0;margin:22px 0;font-size:14px}
+.note.warn{border-left-color:var(--warn);background:var(--warn-soft)}
+.note p:last-child{margin-bottom:0}
+.note strong{color:var(--ink)}
+
+/* pills */
+.yes,.no{font-size:12px;font-weight:700;font-family:var(--mono)}
+.yes{color:var(--go)} .no{color:var(--stop)}
+
+footer{margin-top:72px;padding-top:28px;border-top:1px solid var(--line);
+  font-size:12px;color:var(--ink-3)}
+
+[data-lang]{display:none}
+[data-lang].on{display:block}
+li[data-lang].on{display:list-item}
+
+@media(max-width:600px){
+  .wrap{padding:0 18px 70px}
+  header{padding:36px 0 28px;margin-bottom:34px}
+  .steps>li{padding-left:44px}
+  figure{padding:16px 12px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="langbar">
+  <button class="langbtn" data-set="ko" aria-pressed="true">한국어</button>
+  <button class="langbtn" data-set="en" aria-pressed="false">English</button>
+</div>
+
+<!-- ══════════ KOREAN ══════════ -->
+<div data-lang="ko" class="on">
+
+<header>
+  <div class="eyebrow">Partner Guide</div>
+  <h1>Thinkfree Partner Portal<br>시스템 구성 및 이용 안내</h1>
+  <p class="lede">파트너사가 Thinkfree Office 라이선스를 직접 발급하고 관리할 수 있는 클라우드 서비스입니다. 별도 설치 없이 웹 브라우저로 접속하여 이용합니다.</p>
+  <div class="meta">
+    <span>v1.0</span>
+    <span>2026-09-07</span>
+  </div>
+</header>
+
+<section>
+  <h2><span class="num">01</span>시스템 구성</h2>
+  <p class="sub">Thinkfree가 클라우드에서 운영하는 서비스이며, 파트너는 계정으로 로그인하여 이용합니다.</p>
+
+  <figure>
+    <svg viewBox="0 0 860 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Partner Portal 시스템 구성도">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M1 1 L9 5 L1 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <!-- SaaS platform container -->
+      <rect x="196" y="40" width="376" height="392" rx="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1" stroke-dasharray="5 4"/>
+      <text x="212" y="66" font-family="var(--sans)" font-size="11.5" font-weight="700" fill="var(--accent-deep)" letter-spacing="1.4">THINKFREE CLOUD</text>
+
+      <!-- Master Portal -->
+      <rect x="216" y="82" width="336" height="62" rx="8" fill="var(--raised)" stroke="var(--line-2)"/>
+      <text x="234" y="108" font-family="var(--sans)" font-size="14" font-weight="700" fill="var(--ink)">Master Portal</text>
+      <text x="234" y="128" font-family="var(--sans)" font-size="12" fill="var(--ink-3)">Thinkfree 운영 · 계약 등록</text>
+
+      <!-- Partner Console -->
+      <rect x="216" y="160" width="336" height="62" rx="8" fill="var(--raised)" stroke="var(--accent)" stroke-width="1.5"/>
+      <text x="234" y="186" font-family="var(--sans)" font-size="14" font-weight="700" fill="var(--ink)">Partner Console</text>
+      <text x="234" y="206" font-family="var(--sans)" font-size="12" fill="var(--ink-3)">파트너 라이선스 발급 · 현황 관리</text>
+
+      <!-- License Server -->
+      <rect x="216" y="238" width="160" height="74" rx="8" fill="var(--raised)" stroke="var(--line-2)"/>
+      <text x="234" y="264" font-family="var(--sans)" font-size="13" font-weight="700" fill="var(--ink)">License Server</text>
+      <text x="234" y="282" font-family="var(--sans)" font-size="11.5" fill="var(--ink-3)">라이선스 생성 · 서명</text>
+      <text x="234" y="300" font-family="var(--mono)" font-size="10.5" fill="var(--ink-3)">internal</text>
+
+      <!-- Auth Server -->
+      <rect x="392" y="238" width="160" height="74" rx="8" fill="var(--raised)" stroke="var(--accent)" stroke-width="1.5"/>
+      <text x="410" y="264" font-family="var(--sans)" font-size="13" font-weight="700" fill="var(--ink)">Auth Server</text>
+      <text x="410" y="282" font-family="var(--sans)" font-size="11.5" fill="var(--ink-3)">라이선스 인증 · 통계</text>
+      <text x="410" y="300" font-family="var(--mono)" font-size="10.5" fill="var(--accent)">public</text>
+
+      <!-- domains -->
+      <text x="216" y="342" font-family="var(--mono)" font-size="10.5" fill="var(--ink-3)">console.partner.thinkfree.com</text>
+      <text x="216" y="360" font-family="var(--mono)" font-size="10.5" fill="var(--ink-3)">auth.partner.thinkfree.com</text>
+
+      <!-- Thinkfree Sales -->
+      <rect x="24" y="96" width="140" height="66" rx="8" fill="var(--raised)" stroke="var(--line-2)"/>
+      <text x="42" y="124" font-family="var(--sans)" font-size="13" font-weight="700" fill="var(--ink)">Thinkfree</text>
+      <text x="42" y="143" font-family="var(--sans)" font-size="11.5" fill="var(--ink-3)">영업 · 계약</text>
+
+      <!-- Partner -->
+      <rect x="616" y="152" width="140" height="78" rx="8" fill="var(--raised)" stroke="var(--warn)" stroke-width="1.5"/>
+      <text x="634" y="180" font-family="var(--sans)" font-size="14" font-weight="700" fill="var(--ink)">파트너</text>
+      <text x="634" y="199" font-family="var(--sans)" font-size="11.5" fill="var(--ink-3)">담당자 계정</text>
+      <text x="634" y="217" font-family="var(--sans)" font-size="11.5" fill="var(--ink-3)">웹 브라우저 접속</text>
+
+      <!-- End Customer -->
+      <rect x="616" y="302" width="140" height="86" rx="8" fill="var(--raised)" stroke="var(--line-2)"/>
+      <text x="634" y="330" font-family="var(--sans)" font-size="14" font-weight="700" fill="var(--ink)">End Customer</text>
+      <text x="634" y="349" font-family="var(--sans)" font-size="11.5" fill="var(--ink-3)">Thinkfree Office</text>
+      <text x="634" y="367" font-family="var(--sans)" font-size="11.5" fill="var(--ink-3)">설치 서버</text>
+
+      <!-- arrows -->
+      <g color="var(--ink-3)">
+        <!-- TF sales -> Master Portal -->
+        <path d="M164 122 H 216" fill="none" stroke="currentColor" stroke-width="1.3" marker-end="url(#ar)"/>
+        <text x="172" y="112" font-family="var(--sans)" font-size="10.5" fill="var(--ink-3)">계약 등록</text>
+
+        <!-- Partner -> Console -->
+        <path d="M616 191 H 560" fill="none" stroke="currentColor" stroke-width="1.3" marker-end="url(#ar)"/>
+        <text x="566" y="181" font-family="var(--sans)" font-size="10.5" fill="var(--ink-3)" text-anchor="end">로그인 · 발급</text>
+
+        <!-- Console -> License Server -->
+        <path d="M296 222 V 238" fill="none" stroke="currentColor" stroke-width="1.3" marker-end="url(#ar)"/>
+
+        <!-- Partner -> End Customer -->
+        <path d="M686 230 V 302" fill="none" stroke="currentColor" stroke-width="1.3" marker-end="url(#ar)"/>
+        <text x="696" y="270" font-family="var(--sans)" font-size="10.5" fill="var(--ink-3)">라이선스 전달</text>
+      </g>
+
+      <!-- End Customer -> Auth Server (accent) -->
+      <g color="var(--accent)">
+        <path d="M616 345 H 552" fill="none" stroke="currentColor" stroke-width="1.6" marker-end="url(#ar)"/>
+        <path d="M552 318 V 312" fill="none" stroke="currentColor" stroke-width="1.6" marker-end="url(#ar)"/>
+        <path d="M552 345 V 318" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <text x="560" y="365" font-family="var(--sans)" font-size="10.5" fill="var(--accent)">인증 요청 · 사용 통계</text>
+      </g>
+    </svg>
+    <figcaption>파트너는 Partner Console에 로그인하여 라이선스를 발급하고, 발급된 라이선스 파일을 End Customer에게 전달합니다. End Customer의 Thinkfree Office 서버는 Auth Server와 통신하여 라이선스 유효성을 확인합니다.</figcaption>
+  </figure>
+
+  <h3>구성 요소</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th>구성 요소</th><th>이용 주체</th><th>역할</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Partner Console</strong></td><td>파트너</td><td>라이선스 발급, 발급 현황 조회, 고객사 관리</td></tr>
+      <tr><td><strong>Auth Server</strong></td><td>End Customer 서버</td><td>라이선스 유효성 검증 및 사용 통계 수집</td></tr>
+      <tr><td><strong>Master Portal</strong></td><td>Thinkfree</td><td>파트너 계약 등록 및 발급 현황 모니터링</td></tr>
+      <tr><td><strong>License Server</strong></td><td>—</td><td>라이선스 생성 및 전자 서명 (내부 전용)</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note">
+    <p><strong>별도 설치가 필요하지 않습니다.</strong> 기존에는 파트너 서버에 포털과 인증 서버를 설치해야 했으나, 클라우드 서비스로 전환되어 웹 브라우저 접속만으로 이용할 수 있습니다.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">02</span>파트너 이용 절차</h2>
+  <p class="sub">계정 생성부터 라이선스 갱신까지의 전체 흐름입니다.</p>
+
+  <ol class="steps">
+    <li>
+      <span class="actor tf">Thinkfree</span>
+      <h4>계약 체결 및 계정 생성</h4>
+      <p>Thinkfree 영업 담당자가 파트너 계약을 등록하고 담당자 이메일로 계정을 생성합니다. 등록하신 이메일 주소로 <strong>초대 링크</strong>가 발송됩니다.</p>
+      <p class="mono" style="font-size:12px;color:var(--ink-3)">발신: partner@thinkfree.com</p>
+    </li>
+    <li>
+      <span class="actor pt">파트너</span>
+      <h4>비밀번호 설정 및 가입 완료</h4>
+      <p>초대 메일의 링크에 접속하여 비밀번호를 설정하면 가입이 완료됩니다. 별도의 회원가입 절차는 없습니다.</p>
+    </li>
+    <li>
+      <span class="actor pt">파트너</span>
+      <h4>로그인 및 2차 인증</h4>
+      <p>아이디와 비밀번호 입력 후, 등록된 이메일로 발송되는 <strong>인증 코드</strong>를 입력하여 로그인합니다.</p>
+    </li>
+    <li>
+      <span class="actor pt">파트너</span>
+      <h4>계약 및 잔여 수량 확인</h4>
+      <p>대시보드에서 보유 계약, 발급 가능 수량, 계약 종료일을 확인합니다. 복수의 계약을 보유한 경우 각각 조회할 수 있습니다.</p>
+    </li>
+    <li>
+      <span class="actor pt">파트너</span>
+      <h4>고객사 등록</h4>
+      <p>라이선스를 발급할 End Customer를 등록합니다. 고객사 정보는 <strong>선택 입력</strong>이며, 필수 항목이 아닙니다.</p>
+    </li>
+    <li>
+      <span class="actor pt">파트너</span>
+      <h4>라이선스 발급</h4>
+      <p>차감할 계약을 선택하고 라이선스 종류·수량·유효기간을 지정하여 발급합니다. 발급 즉시 잔여 수량에서 차감됩니다.</p>
+    </li>
+    <li>
+      <span class="actor pt">파트너</span>
+      <h4>라이선스 파일 다운로드 및 전달</h4>
+      <p>발급 완료 후 다운로드 버튼으로 라이선스 파일을 받아 End Customer에게 전달합니다. 발급 내역 화면에서 <strong>언제든 다시 다운로드</strong>할 수 있습니다.</p>
+    </li>
+    <li>
+      <span class="actor pt">파트너</span>
+      <h4>발급 현황 관리</h4>
+      <p>발급한 라이선스의 수량과 만료일을 변경할 수 있습니다. 변경 사항은 인증 서버를 통해 반영되며 별도의 재발급이 필요하지 않습니다.</p>
+    </li>
+    <li>
+      <span class="actor tf">Thinkfree</span>
+      <h4>만료 알림 수신</h4>
+      <p>발급한 라이선스의 만료 <strong>7일 전</strong>에 등록된 이메일로 알림이 발송됩니다. 수신 주소는 Partner Console에서 최대 20개까지 등록할 수 있습니다.</p>
+    </li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="num">03</span>주요 이용 정책</h2>
+  <p class="sub">라이선스 발급 시 적용되는 정책입니다.</p>
+
+  <h3>라이선스 유효기간</h3>
+  <p>발급하는 라이선스의 만료일은 <strong>Thinkfree와의 계약 종료일을 초과할 수 없습니다.</strong></p>
+  <div class="note">
+    <p><strong>예시</strong> — 계약 잔여 기간이 6개월인 경우, 발급 가능한 최대 유효기간은 6개월입니다. 더 긴 기간이 필요하시면 계약을 먼저 갱신해 주십시오.</p>
+  </div>
+
+  <h3>수량 분할 발급</h3>
+  <p>계약 수량 범위 내에서 <strong>자유롭게 나누어 발급</strong>할 수 있습니다.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>계약 수량</th><th>발급 조합 예시</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="3" class="mono">MCC 100</td><td class="mono">25 × 4건</td></tr>
+      <tr><td class="mono">50 × 2건</td></tr>
+      <tr><td class="mono">25 + 50 + 20 + 30 (4건)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:13.5px">발급한 모든 라이선스의 수량 합계가 계약 수량을 초과할 수 없습니다.</p>
+
+  <h3>인증 서버 연동</h3>
+  <p>파트너가 발급하는 라이선스는 <strong>인증 서버 연동 방식</strong>으로 제공됩니다. End Customer의 Thinkfree Office 서버는 인증 서버와 통신할 수 있어야 합니다.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>항목</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>연결 주소</td><td class="mono">auth.partner.thinkfree.com</td></tr>
+      <tr><td>통신 실패 시</td><td><strong>30일간</strong> 서비스가 정상 동작하며, 31일째부터 중단됩니다</td></tr>
+      <tr><td>폐쇄망 환경</td><td>인터넷 연결이 불가한 환경은 Thinkfree 영업 담당자에게 문의해 주십시오</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>라이선스 사용 범위</h3>
+  <p><strong>라이선스 1개는 1곳의 End Customer만 사용할 수 있습니다.</strong></p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>상황</th><th>허용 여부</th></tr></thead>
+    <tbody>
+      <tr><td>동일 고객사 내 서버 교체 · 재설치</td><td><span class="yes">허용</span></td></tr>
+      <tr><td>동일 고객사 내 이중화(HA) 구성</td><td><span class="yes">허용</span></td></tr>
+      <tr><td>동일 고객사 내 개발 → 운영 환경 이관</td><td><span class="yes">허용</span></td></tr>
+      <tr><td>다른 고객사에서의 사용</td><td><span class="no">차단</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>계약 만료 시</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th>시점</th><th>이용 가능 범위</th></tr></thead>
+    <tbody>
+      <tr><td>계약 종료일</td><td>신규 라이선스 발급이 중단됩니다</td></tr>
+      <tr><td>종료 후 30일까지</td><td>로그인하여 <strong>기존 발급 내역 조회 및 재다운로드</strong>가 가능합니다</td></tr>
+      <tr><td>종료 후 31일부터</td><td>로그인이 제한됩니다. 계정과 데이터는 유지되며, 계약 갱신 시 즉시 복구됩니다</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="note warn">
+    <p><strong>이미 발급하신 라이선스는 계약 만료와 무관하게 각자의 만료일까지 정상 동작합니다.</strong></p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">04</span>문의</h2>
+  <p>서비스 이용 및 계약 관련 문의는 담당 영업 담당자에게 연락해 주십시오.</p>
+</section>
+
+<footer>
+  <p>Thinkfree Partner Portal — 시스템 구성 및 이용 안내 · v1.0 · 2026-09-07</p>
+</footer>
+
+</div>
+
+<!-- ══════════ ENGLISH ══════════ -->
+<div data-lang="en">
+
+<header>
+  <div class="eyebrow">Partner Guide</div>
+  <h1>Thinkfree Partner Portal<br>System Overview &amp; Partner Flow</h1>
+  <p class="lede">A cloud service that lets partners issue and manage Thinkfree Office licenses directly. No installation required — access through a web browser.</p>
+  <div class="meta">
+    <span>v1.0</span>
+    <span>2026-09-07</span>
+  </div>
+</header>
+
+<section>
+  <h2><span class="num">01</span>System Overview</h2>
+  <p class="sub">Thinkfree operates the service in the cloud. Partners access it by signing in with their account.</p>
+
+  <figure>
+    <svg viewBox="0 0 860 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Partner Portal system architecture">
+      <rect x="196" y="40" width="376" height="392" rx="12" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1" stroke-dasharray="5 4"/>
+      <text x="212" y="66" font-family="var(--sans)" font-size="11.5" font-weight="700" fill="var(--accent-deep)" letter-spacing="1.4">THINKFREE CLOUD</text>
+
+      <rect x="216" y="82" width="336" height="62" rx="8" fill="var(--raised)" stroke="var(--line-2)"/>
+      <text x="234" y="108" font-family="var(--sans)" font-size="14" font-weight="700" fill="var(--ink)">Master Portal</text>
+      <text x="234" y="128" font-family="var(--sans)" font-size="12" fill="var(--ink-3)">Thinkfree operations · contract setup</text>
+
+      <rect x="216" y="160" width="336" height="62" rx="8" fill="var(--raised)" stroke="var(--accent)" stroke-width="1.5"/>
+      <text x="234" y="186" font-family="var(--sans)" font-size="14" font-weight="700" fill="var(--ink)">Partner Console</text>
+      <text x="234" y="206" font-family="var(--sans)" font-size="12" fill="var(--ink-3)">License issuance · status management</text>
+
+      <rect x="216" y="238" width="160" height="74" rx="8" fill="var(--raised)" stroke="var(--line-2)"/>
+      <text x="234" y="264" font-family="var(--sans)" font-size="13" font-weight="700" fill="var(--ink)">License Server</text>
+      <text x="234" y="282" font-family="var(--sans)" font-size="11.5" fill="var(--ink-3)">Generation · signing</text>
+      <text x="234" y="300" font-family="var(--mono)" font-size="10.5" fill="var(--ink-3)">internal</text>
+
+      <rect x="392" y="238" width="160" height="74" rx="8" fill="var(--raised)" stroke="var(--accent)" stroke-width="1.5"/>
+      <text x="410" y="264" font-family="var(--sans)" font-size="13" font-weight="700" fill="var(--ink)">Auth Server</text>
+      <text x="410" y="282" font-family="var(--sans)" font-size="11.5" fill="var(--ink-3)">Validation · usage stats</text>
+      <text x="410" y="300" font-family="var(--mono)" font-size="10.5" fill="var(--accent)">public</text>
+
+      <text x="216" y="342" font-family="var(--mono)" font-size="10.5" fill="var(--ink-3)">console.partner.thinkfree.com</text>
+      <text x="216" y="360" font-family="var(--mono)" font-size="10.5" fill="var(--ink-3)">auth.partner.thinkfree.com</text>
+
+      <rect x="24" y="96" width="140" height="66" rx="8" fill="var(--raised)" stroke="var(--line-2)"/>
+      <text x="42" y="124" font-family="var(--sans)" font-size="13" font-weight="700" fill="var(--ink)">Thinkfree</text>
+      <text x="42" y="143" font-family="var(--sans)" font-size="11.5" fill="var(--ink-3)">Sales · contracts</text>
+
+      <rect x="616" y="152" width="140" height="78" rx="8" fill="var(--raised)" stroke="var(--warn)" stroke-width="1.5"/>
+      <text x="634" y="180" font-family="var(--sans)" font-size="14" font-weight="700" fill="var(--ink)">Partner</text>
+      <text x="634" y="199" font-family="var(--sans)" font-size="11.5" fill="var(--ink-3)">User account</text>
+      <text x="634" y="217" font-family="var(--sans)" font-size="11.5" fill="var(--ink-3)">Web browser</text>
+
+      <rect x="616" y="302" width="140" height="86" rx="8" fill="var(--raised)" stroke="var(--line-2)"/>
+      <text x="634" y="330" font-family="var(--sans)" font-size="14" font-weight="700" fill="var(--ink)">End Customer</text>
+      <text x="634" y="349" font-family="var(--sans)" font-size="11.5" fill="var(--ink-3)">Thinkfree Office</text>
+      <text x="634" y="367" font-family="var(--sans)" font-size="11.5" fill="var(--ink-3)">on their server</text>
+
+      <g color="var(--ink-3)">
+        <path d="M164 122 H 216" fill="none" stroke="currentColor" stroke-width="1.3" marker-end="url(#ar)"/>
+        <text x="172" y="112" font-family="var(--sans)" font-size="10.5" fill="var(--ink-3)">contract</text>
+        <path d="M616 191 H 560" fill="none" stroke="currentColor" stroke-width="1.3" marker-end="url(#ar)"/>
+        <text x="566" y="181" font-family="var(--sans)" font-size="10.5" fill="var(--ink-3)" text-anchor="end">sign in · issue</text>
+        <path d="M296 222 V 238" fill="none" stroke="currentColor" stroke-width="1.3" marker-end="url(#ar)"/>
+        <path d="M686 230 V 302" fill="none" stroke="currentColor" stroke-width="1.3" marker-end="url(#ar)"/>
+        <text x="696" y="270" font-family="var(--sans)" font-size="10.5" fill="var(--ink-3)">deliver license</text>
+      </g>
+
+      <g color="var(--accent)">
+        <path d="M616 345 H 552" fill="none" stroke="currentColor" stroke-width="1.6" marker-end="url(#ar)"/>
+        <path d="M552 318 V 312" fill="none" stroke="currentColor" stroke-width="1.6" marker-end="url(#ar)"/>
+        <path d="M552 345 V 318" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <text x="560" y="365" font-family="var(--sans)" font-size="10.5" fill="var(--accent)">validation · usage stats</text>
+      </g>
+    </svg>
+    <figcaption>Partners sign in to the Partner Console, issue licenses, and deliver the license file to their End Customer. The End Customer's Thinkfree Office server communicates with the Auth Server to validate the license.</figcaption>
+  </figure>
+
+  <h3>Components</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Component</th><th>Used by</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Partner Console</strong></td><td>Partner</td><td>Issue licenses, view issuance history, manage clients</td></tr>
+      <tr><td><strong>Auth Server</strong></td><td>End Customer server</td><td>Validate licenses and collect usage statistics</td></tr>
+      <tr><td><strong>Master Portal</strong></td><td>Thinkfree</td><td>Register partner contracts and monitor issuance</td></tr>
+      <tr><td><strong>License Server</strong></td><td>—</td><td>Generate and digitally sign licenses (internal only)</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note">
+    <p><strong>No installation required.</strong> Previously the portal and authentication server had to be installed on the partner's own server. As a cloud service, everything is accessible through a web browser.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">02</span>Partner Flow</h2>
+  <p class="sub">From account creation through license renewal.</p>
+
+  <ol class="steps">
+    <li>
+      <span class="actor tf">Thinkfree</span>
+      <h4>Contract &amp; account creation</h4>
+      <p>Your Thinkfree sales representative registers the partner contract and creates an account using your contact email. An <strong>invitation link</strong> is sent to that address.</p>
+      <p class="mono" style="font-size:12px;color:var(--ink-3)">From: partner@thinkfree.com</p>
+    </li>
+    <li>
+      <span class="actor pt">Partner</span>
+      <h4>Set password</h4>
+      <p>Open the link in the invitation email and set your password to complete registration. There is no separate sign-up process.</p>
+    </li>
+    <li>
+      <span class="actor pt">Partner</span>
+      <h4>Sign in with two-factor authentication</h4>
+      <p>After entering your ID and password, enter the <strong>verification code</strong> sent to your registered email address.</p>
+    </li>
+    <li>
+      <span class="actor pt">Partner</span>
+      <h4>Review contract and remaining quota</h4>
+      <p>The dashboard shows your contracts, available quota, and contract end date. If you hold multiple contracts, each is listed separately.</p>
+    </li>
+    <li>
+      <span class="actor pt">Partner</span>
+      <h4>Register a client</h4>
+      <p>Register the End Customer you will issue a license to. Client details are <strong>optional</strong>, not required fields.</p>
+    </li>
+    <li>
+      <span class="actor pt">Partner</span>
+      <h4>Issue a license</h4>
+      <p>Select the contract to deduct from, then specify license type, quantity, and validity period. The quantity is deducted from your remaining quota immediately.</p>
+    </li>
+    <li>
+      <span class="actor pt">Partner</span>
+      <h4>Download and deliver</h4>
+      <p>Download the license file after issuance and deliver it to your End Customer. You can <strong>re-download it at any time</strong> from the issuance history.</p>
+    </li>
+    <li>
+      <span class="actor pt">Partner</span>
+      <h4>Manage issued licenses</h4>
+      <p>You can change the quantity and expiration date of issued licenses. Changes are applied through the Auth Server — no re-issuance needed.</p>
+    </li>
+    <li>
+      <span class="actor tf">Thinkfree</span>
+      <h4>Expiration reminders</h4>
+      <p>A reminder is sent <strong>7 days before</strong> each license expires. You can register up to 20 recipient addresses in the Partner Console.</p>
+    </li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="num">03</span>Key Policies</h2>
+  <p class="sub">Policies that apply when issuing licenses.</p>
+
+  <h3>License validity period</h3>
+  <p>The expiration date of a license you issue <strong>cannot exceed your contract end date with Thinkfree.</strong></p>
+  <div class="note">
+    <p><strong>Example</strong> — If 6 months remain on your contract, the maximum validity you can issue is 6 months. Please renew your contract first if a longer period is needed.</p>
+  </div>
+
+  <h3>Splitting quantities</h3>
+  <p>You may <strong>freely divide</strong> your contracted quantity across multiple licenses.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Contract</th><th>Example combinations</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="3" class="mono">MCC 100</td><td class="mono">25 × 4 licenses</td></tr>
+      <tr><td class="mono">50 × 2 licenses</td></tr>
+      <tr><td class="mono">25 + 50 + 20 + 30 (4 licenses)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:13.5px">The total across all issued licenses cannot exceed your contracted quantity.</p>
+
+  <h3>Auth Server connectivity</h3>
+  <p>Licenses issued by partners use <strong>online authentication</strong>. The End Customer's Thinkfree Office server must be able to reach the Auth Server.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Item</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Endpoint</td><td class="mono">auth.partner.thinkfree.com</td></tr>
+      <tr><td>If unreachable</td><td>Service continues for <strong>30 days</strong>; it stops on day 31</td></tr>
+      <tr><td>Air-gapped environments</td><td>Please contact your Thinkfree sales representative</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>License usage scope</h3>
+  <p><strong>One license may be used by one End Customer only.</strong></p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Situation</th><th>Allowed</th></tr></thead>
+    <tbody>
+      <tr><td>Server replacement or reinstallation at the same client</td><td><span class="yes">Yes</span></td></tr>
+      <tr><td>High-availability setup at the same client</td><td><span class="yes">Yes</span></td></tr>
+      <tr><td>Development → production migration at the same client</td><td><span class="yes">Yes</span></td></tr>
+      <tr><td>Use by a different client</td><td><span class="no">Blocked</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>When your contract expires</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Timing</th><th>Available actions</th></tr></thead>
+    <tbody>
+      <tr><td>Contract end date</td><td>New license issuance stops</td></tr>
+      <tr><td>Up to 30 days after</td><td>You can still sign in to <strong>view and re-download</strong> past issuances</td></tr>
+      <tr><td>From day 31</td><td>Sign-in is restricted. Your account and data are retained and restored immediately upon renewal</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="note warn">
+    <p><strong>Licenses you have already issued continue to work until their own expiration dates, regardless of contract expiration.</strong></p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">04</span>Contact</h2>
+  <p>For questions about the service or your contract, please contact your Thinkfree sales representative.</p>
+</section>
+
+<footer>
+  <p>Thinkfree Partner Portal — System Overview &amp; Partner Flow · v1.0 · 2026-09-07</p>
+</footer>
+
+</div>
+
+</div>
+
+<script>
+(function(){
+  var btns = document.querySelectorAll('.langbtn');
+  var panes = document.querySelectorAll('[data-lang]');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var lang = b.dataset.set;
+      btns.forEach(function(x){ x.setAttribute('aria-pressed', String(x.dataset.set === lang)); });
+      panes.forEach(function(p){ p.classList.toggle('on', p.dataset.lang === lang); });
+      document.documentElement.lang = lang;
+      window.scrollTo(0,0);
+    });
+  });
+})();
+</script>
+</body>
+</html>
